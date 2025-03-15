@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile.app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ZMQ_PUB_ADDRESS=tcp://server:3000
+  server:
+    build:
+      dockerfile: Dockerfile.ser
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ZMQ_BIND_ADDRESS=tcp://*:3000
+
+networks:
+  default:
+    driver: bridge
